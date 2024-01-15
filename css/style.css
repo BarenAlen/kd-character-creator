@@ -13,6 +13,17 @@
     padding: 10px 15px;
 }
 
+.sliders > div {
+	display: flex;
+	flex-wrap: nowrap;
+}
+.sliders > div input {
+	flex-grow: 1;
+}
+.sliders > div label {
+	margin-right: 8px;
+}
+
 #newColor {
     width: 50px;
     height: 50px;
@@ -30,16 +41,17 @@ a {
 }
 
 #heads {
-    position: absolute;
-    top: 50px;
-    left: 65px;
-    /*box-sizing: border-box;*/
-    width: 380px;
+    padding: 5px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 840px;
     height: 500px;
     background: rgba(0,0,0,.8);
     border: 3px solid black;
     overflow: auto;
-    padding-left:10px;
+}
+
+#heads::-webkit-scrollbar {  
     display: none;
 }
 
@@ -55,27 +67,7 @@ a {
     border: 1px solid green;
 }
 
-
-::-webkit-scrollbar { 
-    display: none;
+.style-controls {
+	margin: 20px 0;
+	text-align: center;
 }
-
-.test {
-    width: 1400px;
-    height: 600px;
-    background: #3b460a;
-    background-image: url('../img/decor_h.png'), -webkit-linear-gradient(90deg, rgba(255,255,255,.3) -65%, #3b460a 45%);
-}
-
-
-
-  .test{ background: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(-65%, rgba(255, 255, 255, 0.1)), color-stop(45%, #3b460a));
-  background: -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.1) -65%, #3b460a 45%);
-  background: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.1) -65%, #3b460a 45%);
- }
-    display: block;
-    text-decoration: none;
-    font-size: 87px;
-    font-family: Jet Plane;
-    color:#d1cdc9;
-    @include replace-text(image-url('logo.png'));

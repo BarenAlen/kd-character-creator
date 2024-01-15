@@ -1,7 +1,7 @@
-/*                 BOX
+/*                 boxing
 ****************************************************/
 
-var box = [
+var boxing = [
    {contour:[
       {x:[89,92,95,98,101,104,101,89,65,68,80,68,65,65,86,86,77,80,74,77,74,74,77,62,68,56,62,50,47,47,47,50,56,50,53,56,50,47,47,44,44,44,41,50,62,53,62,86,95,59,56,53,56,53,74,71,68,71,74,77,80,80,83,86,89,101,104,101,98,98]},
       {y:[50,50,53,53,56,62,80,83,86,83,83,80,77,74,71,53,53,56,56,59,62,68,71,59,62,65,68,71,74,77,68,65,62,53,56,59,59,56,62,59,65,71,62,80,80,83,89,89,89,92,95,101,110,113,104,104,92,89,95,89,95,107,110,113,116,110,101,92,92,98]},
@@ -116,11 +116,10 @@ var imageObj = new Image();
 imageObj.onload = function() {
     face.drawImage(imageObj, 53, 26);
 };
-imageObj.src = 'http://localhost/kd/img/group0/face-' + f + '.png';
-//imageObj.src = 'http://localhost/tground/img/group0/face-17.png';
+imageObj.src = './img/group0/face-' + f + '.png';
 
 var fightingStyle = normal;
-  //написать переменную стайл и присвоить ей значения normal box judo или kungFu в
+  //написать переменную стайл и присвоить ей значения normal boxing judo или kungFu в
 
 var clothes = char.getContext('2d');
 clothes.fillStyle = '#ffffff';
@@ -142,8 +141,8 @@ $("input[class=styles]").bind('click', function(){
     fightingStyle = $(this).val();
     if (fightingStyle === 'normal') {
         fightingStyle = normal;
-    } else if (fightingStyle === 'box') {
-        fightingStyle = box;
+    } else if (fightingStyle === 'boxing') {
+        fightingStyle = boxing;
     } else if (fightingStyle === 'kungfu') {
         fightingStyle = kungFu;
     } else if (fightingStyle === 'judo') {
@@ -183,10 +182,6 @@ function drawClothes(style) {
 
 
 
-
-
-
-
 /*          CHANGE COLOR FUNCTIONS
 ************************************************/
 
@@ -201,48 +196,42 @@ function changeClothesColor() {
  
 }
  
-$("input[class=clc]").change(changeClothesColor);
+$("input[class=clc]").on('input', changeClothesColor);
 
-
-
-function appendHeads(){
-  for(i=0;i<=412;i++) {
-    $('#heads').append('<img class="head" alt="'+ i +'" src="img/group0/face-' + i + '.png"/>');
-  }
-}
-
-// $('#headBut').click(function(){
-//   appendHeads();
-// });
-
-appendHeads()
-
-
-    $('.head').click(function() {
-        if ($(this).attr('alt') == f) {
-            return;
-        } else {
-        f = $(this).attr('alt');
-        face.clearRect(53,26,48,24);
-        bg.fillStyle = '#35877e';
-        bg.fillRect(0, 0, 150, 150);
-        clothes.fillStyle = "rgb("+ r +", "+ g +", "+ b +")";
+function drawHead() {
+    if ($(this).attr('alt') == f) {
+        return;
+    } else {
+    f = $(this).attr('alt');
+    face.clearRect(53,26,48,24);
+    bg.fillStyle = '#35877e';
+    bg.fillRect(0, 0, 150, 150);
+    clothes.fillStyle = "rgb("+ r +", "+ g +", "+ b +")";
     drawClothes(fightingStyle);
     contour.fillStyle = '#0a0a0a';
     drawContour(fightingStyle);
     skin.fillStyle = '#ff9160';
     drawSkin(fightingStyle);
-        imageObj.src = 'http://localhost/kd/img/group0/face-' + f + '.png';
-        face.drawImage(imageObj, 53, 26);
-    }   
-});
+    imageObj.src = './img/group0/face-' + f + '.png';
+    face.drawImage(imageObj, 53, 26);
+} 
+}
 
-// $('.head').click(function() {
-//   console.log($(this).attr('alt'));
-// });
+function appendHeads() {
+  for(i=0;i<=412;i++) {
+    let img = document.createElement('img');
+    img.classList.add('head');
+    img.src = 'img/group0/face-' + i + '.png'
+    img.setAttribute('alt', i)
+    
+    img.onload = () => {
+        img.addEventListener('click', drawHead)
 
-$('#headBut').click(function() {
-    $('#heads').toggle();
-})
+        $('#heads').append(img);
+    }
+  }
+}
+
+appendHeads()
   
   
